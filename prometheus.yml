@@ -9,7 +9,7 @@ scrape_configs:
       - targets: ['node-exporter:9100']
 
   # 2. Rendimiento de tus contenedores Docker (FastAPI, Dash, Webhook, etc)
-  - job_name: 'docker-containers'
+  - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']
 
