@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # 1. Signos vitales del ThinkCentre (CPU, RAM, Disco)
+  - job_name: 'thinkcentre-hardware'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # 2. Rendimiento de tus contenedores Docker (FastAPI, Dash, Webhook, etc)
+  - job_name: 'docker-containers'
+    static_configs:
+      - targets: ['cadvisor:8080']
+
+  # 3. Rendimiento de la base de datos en Hostinger
+  - job_name: 'hostinger-mysql'
+    static_configs:
+      - targets: ['mysql-exporter:9104']
