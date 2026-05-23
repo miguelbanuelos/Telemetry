@@ -79,7 +79,7 @@ postgres-exporter:
     environment:
       # La cadena de conexión usa las mismas credenciales que le pusiste a tu contenedor de Timescale
       # El host es el nombre del contenedor de la base de datos
-      DATA_SOURCE_NAME: "postgresql://admin_telemetry:TuPasswordSeguro123@timescaledb_telemetry:5432/homelab_metrics?sslmode=disable"
+      DATA_SOURCE_NAME: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@192.168.3.155:5432/${POSTGRES_DB}?sslmode=disable"
     ports:
       - "9187:9187"
     depends_on:
