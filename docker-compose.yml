@@ -82,8 +82,6 @@ services:
       DATA_SOURCE_NAME: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@192.168.3.155:5432/${POSTGRES_DB}?sslmode=disable"
     ports:
       - "9187:9187"
-    depends_on:
-      - timescaledb
     restart: unless-stopped
 
 
