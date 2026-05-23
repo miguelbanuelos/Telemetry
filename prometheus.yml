@@ -17,7 +17,12 @@ scrape_configs:
   - job_name: 'hostinger-mysql'
     static_configs:
       - targets: ['mysql-exporter:9104']
-
+  # 4. Métricas de Zephyrus
   - job_name: 'zephyrus_windows'
     static_configs:
       - targets: ['192.168.3.202:9182']
+  # 5. Métricas de TimescaleDB 
+  - job_name: 'timescaledb_telemetry'
+    static_configs:
+      - targets: ['postgres_exporter:9187'] 
+      # Usamos el nombre del contenedor y su puerto porque ambos viven en la misma red de Docker

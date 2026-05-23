@@ -73,9 +73,24 @@ services:
     networks:
       - shared_network
 
+postgres-exporter:
+    image: prometheuscommunity/postgres-exporter
+    container_name: postgres_exporter
+    environment:
+      # La cadena de conexión usa las mismas credenciales que le pusiste a tu contenedor de Timescale
+      # El host es el nombre del contenedor de la base de datos
+      DATA_SOURCE_NAME: "postgresql://admin_telemetry:TuPasswordSeguro123@timescaledb_telemetry:5432/homelab_metrics?sslmode=disable"
+    ports:
+      - "9187:9187"
+    depends_on:
+      - timescaledb
+    restart: unless-stopped
+
+
 volumes:
   prometheus_data:
   grafana_data:
+  timescaledb_data:
 
 networks:
   shared_network:
