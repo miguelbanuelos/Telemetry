@@ -77,8 +77,11 @@ postgres-exporter:
     image: prometheuscommunity/postgres-exporter
     container_name: postgres_exporter
     environment:
-      # Cambiamos a formato DSN (llave=valor) para que los caracteres especiales no rompan la lectura
-      DATA_SOURCE_NAME: "host=192.168.3.155 port=5432 user=${POSTGRES_USER} password=${POSTGRES_PASSWORD} dbname=${POSTGRES_DB} sslmode=disable"
+      # 1. URL completamente limpia. Cero símbolos raros.
+      - DATA_SOURCE_NAME=postgresql://192.168.3.155:5432/${POSTGRES_DB}?sslmode=disable
+      # 2. Inyección de credenciales por variables nativas de Postgres
+      - PGUSER=${POSTGRES_USER}
+      - PGPASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "9187:9187"
     restart: unless-stopped
