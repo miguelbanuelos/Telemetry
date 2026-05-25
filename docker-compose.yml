@@ -73,16 +73,17 @@ services:
     networks:
       - shared_network
 
-  postgres-exporter:
+postgres-exporter:
     image: prometheuscommunity/postgres-exporter
     container_name: postgres_exporter
     environment:
-      # La cadena de conexión usa las mismas credenciales que le pusiste a tu contenedor de Timescale
-      # El host es el nombre del contenedor de la base de datos
-      DATA_SOURCE_NAME: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@192.168.3.155:5432/${POSTGRES_DB}?sslmode=disable"
+      # Cambiamos a formato DSN (llave=valor) para que los caracteres especiales no rompan la lectura
+      DATA_SOURCE_NAME: "host=192.168.3.155 port=5432 user=${POSTGRES_USER} password=${POSTGRES_PASSWORD} dbname=${POSTGRES_DB} sslmode=disable"
     ports:
       - "9187:9187"
     restart: unless-stopped
+    networks:
+      - shared_network
 
 
 volumes:
