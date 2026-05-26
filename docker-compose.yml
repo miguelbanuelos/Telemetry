@@ -51,20 +51,21 @@ services:
 
   # Extractor 2: Métricas individuales de cada contenedor Docker
 # Extractor 2: Métricas individuales de cada contenedor Docker
+# Extractor 2: Métricas individuales de cada contenedor Docker
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    image: gcr.io/cadvisor/cadvisor:v0.49.1 
     container_name: telemetry_cadvisor
-    privileged: true                 
+    privileged: true
     ports:                  
       - "8080:8080"
     volumes:
       - /:/rootfs:ro
-      - /var/run:/var/run:ro
+      - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro 
     devices:
-      - /dev/kmsg:/dev/kmsg           
+      - /dev/kmsg:/dev/kmsg
     restart: unless-stopped
     networks:
       - shared_network
