@@ -54,17 +54,17 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.47.2
     container_name: telemetry_cadvisor
+    privileged: true                 
     ports:                  
       - "8080:8080"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro # <--- El puente para leer los nombres
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
       - /dev/disk/:/dev/disk:ro
-    command:
-      - '-docker_only=true' # <--- Limpia la basura: muestra SOLO contenedores
+    devices:
+      - /dev/kmsg:/dev/kmsg           
     restart: unless-stopped
     networks:
       - shared_network
