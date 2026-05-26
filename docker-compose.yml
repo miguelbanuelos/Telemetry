@@ -34,6 +34,8 @@ services:
   node-exporter:
     image: prom/node-exporter:latest
     container_name: telemetry_node_exporter
+    ports:                 
+      - "8080:8080"
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -51,6 +53,8 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.47.2 # Versión estable para arquitecturas x86_64
     container_name: telemetry_cadvisor
+    ports:                  # <--- Agrega esta línea
+      - "9100:9100"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -65,6 +69,8 @@ services:
   mysql-exporter:
     image: prom/mysqld-exporter:latest
     container_name: telemetry_mysql_exporter
+    ports:                  # <--- Agrega esta línea
+      - "9104:9104"
     volumes:
       - ./.my.cnf:/.my.cnf:ro
     command:
