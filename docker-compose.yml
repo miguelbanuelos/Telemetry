@@ -49,11 +49,14 @@ services:
     networks:
       - shared_network
 
-  # Extractor 2: Métricas individuales de cada contenedor Docker
+  
+# Extractor 2: Métricas individuales de cada contenedor Docker
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.49.1
     container_name: telemetry_cadvisor
     privileged: true
+    pid: "host"                          
+    cgroupns_mode: host                  
     ports:                  
       - "8080:8080"
     volumes:
@@ -62,7 +65,7 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro  
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro 
     command:
       - '-docker_only=true'               
     devices:
