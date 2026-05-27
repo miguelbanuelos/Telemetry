@@ -25,5 +25,8 @@ scrape_configs:
   - job_name: 'timescaledb_telemetry'
     static_configs:
       - targets: ['192.168.3.155:9187'] 
-      #- targets: ['postgres_exporter:9187'] 
-      # Usamos el nombre del contenedor y su puerto porque ambos viven en la misma red de Docker
+  # 6. Métricas de GPU NVIDIA RTX 3060 en Zephyrus
+  - job_name: 'zephyrus_rtx3060'
+    static_configs:
+      - targets: ['192.168.3.202:20000']
+      

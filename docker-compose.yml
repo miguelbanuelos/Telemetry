@@ -56,7 +56,6 @@ services:
     container_name: telemetry_cadvisor
     privileged: true
     pid: "host"                          
-    cgroupns_mode: host                  
     ports:                  
       - "8080:8080"
     volumes:
