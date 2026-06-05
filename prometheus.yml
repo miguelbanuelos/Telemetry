@@ -31,7 +31,7 @@ scrape_configs:
       - targets: ['192.168.3.202:20000']
   - job_name: 'jetson_nano_hw'
     static_configs:
-      - targets: ['192.168.3.99:9800'] # Métricas de jtop (GPU, Temp, Power)
+      - targets: ['192.168.3.99:9102'] # Métricas de jtop (GPU, Temp, Power)
 
   - job_name: 'jetson_nano_os'
     static_configs:
