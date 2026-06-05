@@ -29,4 +29,11 @@ scrape_configs:
   - job_name: 'zephyrus_rtx3060'
     static_configs:
       - targets: ['192.168.3.202:20000']
+  - job_name: 'jetson_nano_hw'
+    static_configs:
+      - targets: ['192.168.3.99:9998'] # Métricas de jtop (GPU, Temp, Power)
+
+  - job_name: 'jetson_nano_os'
+    static_configs:
+      - targets: ['192.168.3.99:9100'] # Métricas estándar de Linux    
       
