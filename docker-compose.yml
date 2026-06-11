@@ -51,6 +51,7 @@ services:
 
   
 # Extractor 2: Métricas individuales de cada contenedor Docker
+  # Extractor 2: Métricas individuales de cada contenedor Docker
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.49.1
     container_name: telemetry_cadvisor
@@ -60,15 +61,14 @@ services:
       - "8080:8080"
     volumes:
       - /:/rootfs:ro
-      - /var/run:/var/run:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-     
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /run:/run:ro
     command:
       - '-docker_only=true'
+      # ESTA ES LA BANDERA CLAVE PARA CGROUPS V2 EN UBUNTU:
+      - '-whitelisted_container_labels=com.docker.compose.service,com.docker.compose.project'
     devices:
       - /dev/kmsg:/dev/kmsg
     restart: unless-stopped
