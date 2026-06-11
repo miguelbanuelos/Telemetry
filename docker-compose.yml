@@ -55,7 +55,7 @@ services:
     image: gcr.io/cadvisor/cadvisor:v0.49.1
     container_name: telemetry_cadvisor
     privileged: true
-    pid: "host"                          
+    pid: "host"                                          
     ports:                  
       - "8080:8080"
     volumes:
@@ -64,9 +64,12 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro 
+      # CAMBIO 1: Mapeo específico compatible con cgroups v2 en Ubuntu
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command:
-      - '-docker_only=true'               
+      # CAMBIO 2: Añadimos la bandera para forzar el modo cgroups v2
+      - '-docker_only=true'
+      - '-disable_root_cgroup_stats=true' # Evita que todo se agrupe en id="/"
     devices:
       - /dev/kmsg:/dev/kmsg
     restart: unless-stopped

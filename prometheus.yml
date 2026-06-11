@@ -21,6 +21,7 @@ scrape_configs:
   - job_name: 'zephyrus_windows'
     static_configs:
       - targets: ['192.168.3.202:9182']
+      #- targets: ['g14server:9182']
       - targets: ['100.108.188.43:9182'] #tailscale IP de Zephyrus (si el puerto 9182 no es accesible desde la IP local, usar esta IP de Tailscale) Necesita algo por si cambia la ip de tailscale. Name resolution
   # 5. Métricas de TimescaleDB 
   - job_name: 'timescaledb_telemetry'
