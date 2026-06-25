@@ -1,7 +1,7 @@
 [
   {
     "targets": [
-      "telemetry_node_exporter_lab:9100"
+      "node-exporter:9100"
     ],
     "labels": {
       "job": "ThinkCentre-hardware",
@@ -10,7 +10,7 @@
   },
   {
     "targets": [
-      "telemetry_cadvisor_lab:8080"
+      "cadvisor:8080"
     ],
     "labels": {
       "job": "Cadvisor",
