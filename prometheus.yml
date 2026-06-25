@@ -3,29 +3,8 @@ global:
   evaluation_interval: 10s
 
 scrape_configs:
-  # 1. Signos vitales del ThinkCentre (CPU, RAM, Disco)
-  - job_name: 'thinkcentre-hardware'
-    static_configs:
-      - targets: ['node-exporter:9100']
-
-  # 2. Rendimiento de tus contenedores Docker (FastAPI, Dash, Webhook, etc)
-  - job_name: 'cadvisor'
-    static_configs:
-      - targets: ['cadvisor:8080']
-
-  # 3. Métricas de Zephyrus
-  - job_name: 'zephyrus_windows'
-    static_configs:
-      - targets: ['192.168.3.202:9182']
-      - targets: ['100.108.188.43:9182']
-      
-  # 4. Métricas de TimescaleDB 
-  - job_name: 'timescaledb_telemetry'
-    static_configs:
-      - targets: ['192.168.3.155:9187'] 
-
-# 5. Métricas de Nano Jetson    
-  - job_name: 'jetson_nano_os'
-    static_configs:
-      - targets: ['192.168.3.99:9100'] # Métricas estándar de Linux    
-      
+  - job_name: 'telemetry_infrastructure'
+    file_sd_configs:
+      - files:
+        - '/etc/prometheus/targets.json'
+        refresh_interval: 15s

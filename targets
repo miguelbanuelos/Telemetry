@@ -1,0 +1,39 @@
+[
+  {
+    "targets": [
+      "telemetry_node_exporter_lab:9100"
+    ],
+    "labels": {
+      "job": "ThinkCentre-hardware",
+      "env": "Linux"
+    }
+  },
+  {
+    "targets": [
+      "telemetry_cadvisor_lab:8080"
+    ],
+    "labels": {
+      "job": "Cadvisor",
+      "env": "Container"
+    }
+  },
+  {
+    "targets": [
+      "192.168.3.202:9182",
+      "100.108.188.43:9182"
+    ],
+    "labels": {
+      "job": "Zephyrus-hardware",
+      "env": "Windows"
+    }
+  },
+  {
+    "targets": [
+      "192.168.3.99:9100"
+    ],
+    "labels": {
+      "job": "Nano-Jetson-hardware",
+      "env": "Linux"
+    }
+  }
+]
