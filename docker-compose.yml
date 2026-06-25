@@ -14,7 +14,7 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention.time=180d'  # Guarda 180 días de historia
       - '--storage.tsdb.retention.size=20GB'
-
+      - '--web.enable-admin-api'
     restart: unless-stopped
     networks:
       - shared_network
