@@ -13,26 +13,17 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8080']
 
-  # 3. Rendimiento de la base de datos en Hostinger
-  - job_name: 'hostinger-mysql'
-    static_configs:
-      - targets: ['mysql-exporter:9104']
-  # 4. Métricas de Zephyrus
+  # 3. Métricas de Zephyrus
   - job_name: 'zephyrus_windows'
     static_configs:
       - targets: ['192.168.3.202:9182']
-  # 5. Métricas de TimescaleDB 
+      
+  # 4. Métricas de TimescaleDB 
   - job_name: 'timescaledb_telemetry'
     static_configs:
       - targets: ['192.168.3.155:9187'] 
-  # 6. Métricas de GPU NVIDIA RTX 3060 en Zephyrus
-  - job_name: 'zephyrus_rtx3060'
-    static_configs:
-      - targets: ['192.168.3.202:20000']
-  - job_name: 'jetson_nano_hw'
-    static_configs:
-      - targets: ['192.168.3.99:9102'] # Métricas de jtop (GPU, Temp, Power)
 
+# 5. Métricas de Nano Jetson    
   - job_name: 'jetson_nano_os'
     static_configs:
       - targets: ['192.168.3.99:9100'] # Métricas estándar de Linux    
