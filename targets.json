@@ -19,17 +19,16 @@
   },
   {
     "targets": [
-      "postgres-exporter:9187"
+      "192.168.3.155:9187"
     ],
     "labels": {
-      "job": "postgres-exporter",
+      "job": "timescaledb_telemetry",
       "env": "Database"
     }
   },
   {
     "targets": [
-      "192.168.3.202:9182"
-    ],
+      "192.168.3.202:9182"],
     "labels": {
       "job": "zephyrus_windows",
       "env": "Windows"
@@ -40,8 +39,8 @@
       "192.168.3.99:9100"
     ],
     "labels": {
-      "job": "jetson-nano-os",
-      "env": "Linux"
+      "job": "jetson_nano_os",
+      "env": "Linux_ARM"
     }
   }
 ]
