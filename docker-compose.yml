@@ -49,44 +49,27 @@ services:
     networks:
       - shared_network
 
-  
-# Extractor 2: Métricas individuales de cada contenedor Docker
+  # Extractor 2: Métricas individuales de cada contenedor Docker
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.49.1
     container_name: telemetry_cadvisor
     privileged: true
-    pid: "host"                          
+    pid: "host"                                          
     ports:                  
       - "8080:8080"
     volumes:
       - /:/rootfs:ro
-      - /var/run:/var/run:rw
+      - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro 
-    command:
-      - '-docker_only=true'               
+      - /dev/disk/:/dev/disk:ro
     devices:
       - /dev/kmsg:/dev/kmsg
     restart: unless-stopped
     networks:
       - shared_network
 
-  # Extractor 3: Métricas de MySQL en Hostinger
-  mysql-exporter:
-    image: prom/mysqld-exporter:latest
-    container_name: telemetry_mysql_exporter
-    ports:                 
-      - "9104:9104"
-    volumes:
-      - ./.my.cnf:/.my.cnf:ro
-    command:
-      - '--config.my-cnf=/.my.cnf'
-    restart: unless-stopped
-    networks:
-      - shared_network
-# Extractor 4: Métricas de ProstgreSQL 
+# Extractor 3: Métricas de ProstgreSQL 
   postgres-exporter:
     image: prometheuscommunity/postgres-exporter
     container_name: postgres_exporter
